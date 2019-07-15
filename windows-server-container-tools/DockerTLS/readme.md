@@ -10,7 +10,7 @@ This is an initial set of PowerShell scripts that utalize OpenSSL to automate cr
 On your client machine run:
 ```powershell
   . .\DockerCertificateTools.ps1
-  Install-OpenSSL
+  Install-OpenSSL  !!!use: choco install OpenSSL.Light instead (path in script is wrong)
   New-OpenSSLCertAuth
   New-ClientKeyandCert
 ```
