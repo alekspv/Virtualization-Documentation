@@ -19,7 +19,12 @@ Then either run:
 ```powershell 
 New-ServerKeyandCert -serverName "$($env:COMPUTERNAME)" -serverIPAddresses @($(([System.Net.DNS]::GetHostAddresses("$($env:COMPUTERNAME)")|Where-Object {$_.AddressFamily -eq "InterNetwork"}   |  select-object IPAddressToString)[0].IPAddressToString), "127.0.0.1")
 ``` 
-Where you don't need to provide the container hosts name/IP Address, the script will detect automatically. Then copy the server-cert.pem/server-key.pem and ca.pem file to the c:\programdata\docker\certs.d directory and create a tag.txt file in c:\programdata\docker directory.
+Where you don't need to provide the container hosts name/IP Address, the script will detect automatically.
+Then copy the server-cert.pem/server-key.pem and ca.pem file to the c:\programdata\docker\certs.d directory and create a tag.txt file in c:\programdata\docker directory.
+```powershell
+mkdir c:\programdata\docker\certs.d
+Copy-Item C:\myDockerKeys\*.pem C:\ProgramData\docker\certs.d\
+```
 
 or
 ```powershell 
