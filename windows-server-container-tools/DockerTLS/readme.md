@@ -17,9 +17,9 @@ On your client machine run:
 
 Then either run:
 ```powershell 
-New-ServerKeyandCert -serverName "WIN-H3NPPMUM1U7" -serverIPAddresses @("10.0.0.5", "127.0.0.1")
+New-ServerKeyandCert -serverName "$($env:COMPUTERNAME)" -serverIPAddresses @($(([System.Net.DNS]::GetHostAddresses("$($env:COMPUTERNAME)")|Where-Object {$_.AddressFamily -eq "InterNetwork"}   |  select-object IPAddressToString)[0].IPAddressToString), "127.0.0.1")
 ``` 
-Where you provide the container hosts name/IP Address and then copy the server-cert.pem/server-key.pem and ca.pem file to the c:\programdata\docker\certs.d directory and create a tag.txt file in c:\programdata\docker directory.
+Where you don't need to provide the container hosts name/IP Address, the script will detect automatically. Then copy the server-cert.pem/server-key.pem and ca.pem file to the c:\programdata\docker\certs.d directory and create a tag.txt file in c:\programdata\docker directory.
 
 or
 ```powershell 
